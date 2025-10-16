@@ -1,0 +1,23 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\unrealeditor\\inc\\c_pp\\uht\\sidescrollingplayercontroller.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\x64\\c_ppeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\c_pp\\definitions.c_pp.h",
+            "p:\\gitt\\c_pp\\c_pp\\source\\c_pp\\variant_sidescrolling\\sidescrollingplayercontroller.h",
+            "p:\\epic\\ue_5.6\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputaction.h",
+            "p:\\epic\\ue_5.6\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputmodifiers.h",
+            "p:\\epic\\ue_5.6\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputactionvalue.h",
+            "p:\\epic\\ue_5.6\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputactionvalue.generated.h",
+            "p:\\epic\\ue_5.6\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputmodifiers.generated.h",
+            "p:\\epic\\ue_5.6\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputtriggers.h",
+            "p:\\epic\\ue_5.6\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputtriggers.generated.h",
+            "p:\\epic\\ue_5.6\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputaction.generated.h",
+            "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\unrealeditor\\inc\\c_pp\\uht\\sidescrollingplayercontroller.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

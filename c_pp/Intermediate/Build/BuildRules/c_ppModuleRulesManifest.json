@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"P:\\gitt\\c_pp\\c_pp\\Source\\c_pp\\c_pp.Build.cs",
+		"P:\\gitt\\c_pp\\c_pp\\Source\\c_pp.Target.cs",
+		"P:\\gitt\\c_pp\\c_pp\\Source\\c_ppEditor.Target.cs"
+	],
+	"EngineVersion": "5.6.1"
+}

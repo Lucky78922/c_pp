@@ -1,0 +1,323 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "EpicGames.Build/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.Core": "1.0.0",
+          "EpicGames.IoHash": "1.0.0",
+          "EpicGames.MsBuild": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EpicGames.Build.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.Build.dll": {}
+        }
+      },
+      "EpicGames.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/EpicGames.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.Core.dll": {}
+        }
+      },
+      "EpicGames.Horde/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.Core": "1.0.0",
+          "EpicGames.IoHash": "1.0.0",
+          "EpicGames.OIDC": "1.0.0",
+          "EpicGames.Oodle": "1.0.0",
+          "EpicGames.Serialization": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EpicGames.Horde.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.Horde.dll": {}
+        }
+      },
+      "EpicGames.IoHash/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EpicGames.IoHash.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.IoHash.dll": {}
+        }
+      },
+      "EpicGames.MsBuild/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EpicGames.MsBuild.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.MsBuild.dll": {}
+        }
+      },
+      "EpicGames.OIDC/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/EpicGames.OIDC.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.OIDC.dll": {}
+        }
+      },
+      "EpicGames.Oodle/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/EpicGames.Oodle.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.Oodle.dll": {}
+        }
+      },
+      "EpicGames.Serialization/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.IoHash": "1.0.0",
+          "EpicGames.Oodle": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EpicGames.Serialization.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.Serialization.dll": {}
+        }
+      },
+      "EpicGames.UBA/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/EpicGames.UBA.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.UBA.dll": {}
+        }
+      },
+      "EpicGames.UHT/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.Build": "1.0.0",
+          "EpicGames.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EpicGames.UHT.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EpicGames.UHT.dll": {}
+        }
+      },
+      "UE5ProgramRules/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.Build": "1.0.0",
+          "UE5Rules": "1.0.0",
+          "UnrealBuildTool": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UE5ProgramRules.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UE5ProgramRules.dll": {}
+        }
+      },
+      "UE5Rules/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.Build": "1.0.0",
+          "UnrealBuildTool": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UE5Rules.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UE5Rules.dll": {}
+        }
+      },
+      "UnrealBuildTool/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "EpicGames.Build": "1.0.0",
+          "EpicGames.Core": "1.0.0",
+          "EpicGames.Horde": "1.0.0",
+          "EpicGames.IoHash": "1.0.0",
+          "EpicGames.OIDC": "1.0.0",
+          "EpicGames.Serialization": "1.0.0",
+          "EpicGames.UBA": "1.0.0",
+          "EpicGames.UHT": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UnrealBuildTool.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UnrealBuildTool.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EpicGames.Build/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Build/EpicGames.Build.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Build/EpicGames.Build.csproj"
+    },
+    "EpicGames.Core/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Core/EpicGames.Core.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Core/EpicGames.Core.csproj"
+    },
+    "EpicGames.Horde/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Horde/EpicGames.Horde.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Horde/EpicGames.Horde.csproj"
+    },
+    "EpicGames.IoHash/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.IoHash/EpicGames.IoHash.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.IoHash/EpicGames.IoHash.csproj"
+    },
+    "EpicGames.MsBuild/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.MsBuild/EpicGames.MsBuild.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.MsBuild/EpicGames.MsBuild.csproj"
+    },
+    "EpicGames.OIDC/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.OIDC/EpicGames.OIDC.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.OIDC/EpicGames.OIDC.csproj"
+    },
+    "EpicGames.Oodle/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Oodle/EpicGames.Oodle.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Oodle/EpicGames.Oodle.csproj"
+    },
+    "EpicGames.Serialization/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Serialization/EpicGames.Serialization.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.Serialization/EpicGames.Serialization.csproj"
+    },
+    "EpicGames.UBA/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.UBA/EpicGames.UBA.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.UBA/EpicGames.UBA.csproj"
+    },
+    "EpicGames.UHT/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.UHT/EpicGames.UHT.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/Shared/EpicGames.UHT/EpicGames.UHT.csproj"
+    },
+    "UE5ProgramRules/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Intermediate/Build/BuildRulesProjects/UE5ProgramRules/UE5ProgramRules.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Intermediate/Build/BuildRulesProjects/UE5ProgramRules/UE5ProgramRules.csproj"
+    },
+    "UE5Rules/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Intermediate/Build/BuildRulesProjects/UE5Rules/UE5Rules.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Intermediate/Build/BuildRulesProjects/UE5Rules/UE5Rules.csproj"
+    },
+    "UnrealBuildTool/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/UnrealBuildTool/UnrealBuildTool.csproj",
+      "msbuildProject": "../../../../../../../epic/UE_5.6/Engine/Source/Programs/UnrealBuildTool/UnrealBuildTool.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "EpicGames.Build >= 1.0.0",
+      "UE5ProgramRules >= 1.0.0",
+      "UE5Rules >= 1.0.0",
+      "UnrealBuildTool >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Mark\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "P:\\gitt\\c_pp\\c_pp\\Intermediate\\Build\\BuildRulesProjects\\c_ppModuleRules\\c_ppModuleRules.csproj",
+      "projectName": "c_ppModuleRules",
+      "projectPath": "P:\\gitt\\c_pp\\c_pp\\Intermediate\\Build\\BuildRulesProjects\\c_ppModuleRules\\c_ppModuleRules.csproj",
+      "packagesPath": "C:\\Users\\Mark\\.nuget\\packages\\",
+      "outputPath": "P:\\gitt\\c_pp\\c_pp\\Intermediate\\Build\\BuildRulesProjects\\c_ppModuleRules\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Mark\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "P:\\epic\\UE_5.6\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj": {
+              "projectPath": "P:\\epic\\UE_5.6\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj"
+            },
+            "P:\\epic\\UE_5.6\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj": {
+              "projectPath": "P:\\epic\\UE_5.6\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj"
+            },
+            "P:\\epic\\UE_5.6\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj": {
+              "projectPath": "P:\\epic\\UE_5.6\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj"
+            },
+            "P:\\epic\\UE_5.6\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj": {
+              "projectPath": "P:\\epic\\UE_5.6\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\unrealeditor\\inc\\c_pp\\uht\\platformingcharacter.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\x64\\c_ppeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\c_pp\\definitions.c_pp.h",
+            "p:\\gitt\\c_pp\\c_pp\\source\\c_pp\\variant_platforming\\platformingcharacter.h",
+            "p:\\epic\\ue_5.6\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "p:\\epic\\ue_5.6\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "p:\\epic\\ue_5.6\\engine\\source\\runtime\\net\\core\\public\\net\\core\\nettoken\\nettokenexportcontext.h",
+            "p:\\epic\\ue_5.6\\engine\\source\\runtime\\experimental\\iris\\core\\public\\iris\\serialization\\irisobjectreferencepackagemap.h",
+            "p:\\epic\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\iriscore\\uht\\irisobjectreferencepackagemap.generated.h",
+            "p:\\epic\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementreplication.generated.h",
+            "p:\\epic\\ue_5.6\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "p:\\epic\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
+            "p:\\epic\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
+            "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\unrealeditor\\inc\\c_pp\\uht\\platformingcharacter.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

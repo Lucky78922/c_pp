@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "c_pp",
+			"Path": "..\\Source\\c_pp.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "c_ppEditor",
+			"Path": "..\\Source\\c_ppEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

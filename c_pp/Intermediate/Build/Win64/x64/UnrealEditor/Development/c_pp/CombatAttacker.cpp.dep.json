@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "p:\\gitt\\c_pp\\c_pp\\source\\c_pp\\variant_combat\\interfaces\\combatattacker.cpp",
+        "ProvidedModule": "",
+        "PCH": "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\x64\\c_ppeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\c_pp\\definitions.c_pp.h",
+            "p:\\gitt\\c_pp\\c_pp\\source\\c_pp\\variant_combat\\interfaces\\combatattacker.h",
+            "p:\\gitt\\c_pp\\c_pp\\intermediate\\build\\win64\\unrealeditor\\inc\\c_pp\\uht\\combatattacker.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
