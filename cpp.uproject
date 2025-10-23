@@ -15,10 +15,12 @@
 			]
 		},
 		{
-		  "Name": "cpp",
-		  "Type": "Runtime",
-		  "LoadingPhase": "Default",
-		  "WarnAsError": false
+			"Name": "cpp",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	],
 	"Plugins": [
