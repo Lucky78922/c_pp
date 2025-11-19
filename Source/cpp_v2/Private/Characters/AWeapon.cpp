@@ -1,6 +1,7 @@
 #include "Characters/AWeapon.h"
 #include "Characters/ABasePlayerCharacter.h"
 #include "Components/BoxComponent.h"
+#include "Characters/CombatInterface.h"
 #include "DrawDebugHelpers.h"
 
 AWeapon::AWeapon()
@@ -14,6 +15,7 @@ AWeapon::AWeapon()
 	CollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	CollisionBox->SetCollisionResponseToAllChannels(ECR_Ignore);
 	CollisionBox->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+	CollisionBox->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Overlap); 
 	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AWeapon::OnOverlapBegin);
 
 	StartTrace = CreateDefaultSubobject<USceneComponent>(TEXT("StartTrace"));
@@ -31,7 +33,7 @@ void AWeapon::PickUp(AActor* Interactor)
 		Player->Equip(this);
 }
 
-void AWeapon::StartAttack() { /* opcjonalnie */ }
+void AWeapon::StartAttack() { }
 
 void AWeapon::EnableCollision()
 {
@@ -46,24 +48,23 @@ void AWeapon::DisableCollision()
 void AWeapon::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (!OtherActor || OtherActor == this) return;
+	if (!OtherActor || OtherActor == this || OtherActor == GetOwner()) return;
 
 	FHitResult Hit;
 	const FVector Start = StartTrace->GetComponentLocation();
 	const FVector End = EndTrace->GetComponentLocation();
 
-	const bool bHit = GetWorld()->SweepSingleByChannel(
-		Hit,
-		Start,
-		End,
-		FQuat::Identity,
-		ECC_Pawn,
+	bool bHit = GetWorld()->SweepSingleByChannel(
+		Hit, Start, End, FQuat::Identity, ECC_Pawn,
 		FCollisionShape::MakeBox(CollisionBox->GetScaledBoxExtent())
 	);
 
-	if (bHit)
+	if (bHit && Hit.GetActor())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit at %s"), *Hit.Location.ToString());
+		if (Hit.GetActor()->Implements<UCombatInterface>())
+		{
+			ICombatInterface::Execute_GetHit(Hit.GetActor(), GetOwner(), 10.f);
+		}
 		DrawDebugPoint(GetWorld(), Hit.Location, 10.f, FColor::Red, false, 2.f);
 	}
 }

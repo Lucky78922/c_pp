@@ -8,11 +8,10 @@
 #include "Characters/InteractionComponent.h"
 #include "Characters/AWeapon.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Characters/AttributesComponent.h"
 
 AABasePlayerCharacter::AABasePlayerCharacter()
 {
-	PrimaryActorTick.bCanEverTick = true;
-
 	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("InteractionComponent"));
 
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -31,6 +30,27 @@ AABasePlayerCharacter::AABasePlayerCharacter()
 void AABasePlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (IsLocallyControlled() && MainHUDClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetController());
+		if (PC)
+		{
+			HUDInstance = CreateWidget<UMainHUD>(PC, MainHUDClass);
+			if (HUDInstance)
+			{
+				HUDInstance->AddToViewport();
+				HUDInstance->UpdateHealth(Attributes->CurrentHealth, Attributes->MaxHealth);
+				HUDInstance->UpdateStamina(Attributes->CurrentStamina, Attributes->MaxStamina);
+			}
+		}
+	}
+
+	if (Attributes)
+	{
+		Attributes->OnHealthChanged.AddDynamic(this, &AABasePlayerCharacter::OnHealthUpdated);
+		Attributes->OnStaminaChanged.AddDynamic(this, &AABasePlayerCharacter::OnStaminaUpdated);
+	}
 }
 
 void AABasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -41,7 +61,7 @@ void AABasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	{
 		if (MoveAction)   EIC->BindAction(MoveAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Move);
 		if (LookAction)   EIC->BindAction(LookAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Look);
-		if (JumpAction)   EIC->BindAction(JumpAction,   ETriggerEvent::Triggered, this, &ACharacter::Jump);
+		if (JumpAction)   EIC->BindAction(JumpAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Jump);
 		if (EquipAction)  EIC->BindAction(EquipAction,  ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Interact);
 		if (AttackAction) EIC->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Attack);
 	}
@@ -60,6 +80,8 @@ void AABasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 void AABasePlayerCharacter::Move(const FInputActionValue& Value)
 {
+	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
+
 	FVector2D V = Value.Get<FVector2D>();
 	if (Controller && !V.IsNearlyZero())
 	{
@@ -71,6 +93,8 @@ void AABasePlayerCharacter::Move(const FInputActionValue& Value)
 
 void AABasePlayerCharacter::Look(const FInputActionValue& Value)
 {
+	if (CurrentState == EPawnState::Dead) return;
+
 	FVector2D V = Value.Get<FVector2D>();
 	if (Controller)
 	{
@@ -79,8 +103,20 @@ void AABasePlayerCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
+void AABasePlayerCharacter::Jump()
+{
+	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
+
+	if (Attributes && Attributes->CanPayStamina(Attributes->StaminaCosts.JumpCost))
+	{
+		Attributes->PayStamina(Attributes->StaminaCosts.JumpCost);
+		Super::Jump();
+	}
+}
+
 void AABasePlayerCharacter::Interact()
 {
+	if (CurrentState == EPawnState::Dead) return;
 	if (InteractionComponent) InteractionComponent->TryInteract(this);
 }
 
@@ -88,6 +124,8 @@ void AABasePlayerCharacter::Equip(AWeapon* Weapon)
 {
 	if (!Weapon) return;
 	CurrentWeapon = Weapon;
+	CurrentWeapon->SetOwner(this);
+	SetState(EPawnState::Combat);
 
 	const FName Socket = TEXT("WeaponSocket");
 	USceneComponent* Grip = Weapon->GetGripPoint();
@@ -103,9 +141,26 @@ void AABasePlayerCharacter::Equip(AWeapon* Weapon)
 
 void AABasePlayerCharacter::Attack(const FInputActionValue& Value)
 {
+	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
+
 	if (CurrentWeapon && AttackMontage)
 	{
-		PlayAnimMontage(AttackMontage);
-		CurrentWeapon->StartAttack();
+		if (Attributes && Attributes->CanPayStamina(Attributes->StaminaCosts.AttackCost))
+		{
+			Attributes->PayStamina(Attributes->StaminaCosts.AttackCost);
+			PlayAnimMontage(AttackMontage);
+			CurrentWeapon->StartAttack();
+		}
 	}
+}
+
+void AABasePlayerCharacter::OnHealthUpdated(float Current, float Max)
+{
+	if (HUDInstance) HUDInstance->UpdateHealth(Current, Max);
+	if (Current <= 0) SetState(EPawnState::Dead);
+}
+
+void AABasePlayerCharacter::OnStaminaUpdated(float Current, float Max)
+{
+	if (HUDInstance) HUDInstance->UpdateStamina(Current, Max);
 }

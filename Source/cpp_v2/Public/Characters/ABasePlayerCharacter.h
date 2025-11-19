@@ -3,8 +3,7 @@
 #include "CoreMinimal.h"
 #include "Characters/ABaseCharacter.h"
 #include "InputActionValue.h"
-#include "Characters/InteractionComponent.h"
-#include "Characters/AWeapon.h"
+#include "UI/MainHUD.h"
 #include "ABasePlayerCharacter.generated.h"
 
 class UInputMappingContext;
@@ -12,6 +11,7 @@ class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
 class UAnimMontage;
+class UInteractionComponent;
 
 UCLASS()
 class CPP_V2_API AABasePlayerCharacter : public AABaseCharacter
@@ -21,7 +21,12 @@ class CPP_V2_API AABasePlayerCharacter : public AABaseCharacter
 public:
 	AABasePlayerCharacter();
 
-	// --- PUBLIC ---
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UMainHUD> MainHUDClass;
+
+	UPROPERTY()
+	UMainHUD* HUDInstance;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Attack)
 	UAnimMontage* AttackMontage;
 
@@ -43,10 +48,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputAction* AttackAction;
 
-	// --- CURRENT WEAPON — PUBLIC! ---
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Weapon)
-	AWeapon* CurrentWeapon;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Interaction)
 	UInteractionComponent* InteractionComponent;
 
@@ -62,13 +63,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
 	float BaseLookUpRate = 1.f;
 
-	// --- FUNCTIONS ---
 	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual void Jump() override;
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void Interact();
 	void Equip(AWeapon* Weapon);
 	void Attack(const FInputActionValue& Value);
+
+	UFUNCTION()
+	void OnHealthUpdated(float Current, float Max);
+
+	UFUNCTION()
+	void OnStaminaUpdated(float Current, float Max);
 };

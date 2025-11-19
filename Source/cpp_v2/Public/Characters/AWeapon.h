@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "AItem.h"
-#include "Characters/InteractionInterface.h"
 #include "AWeapon.generated.h"
 
 class USceneComponent;
