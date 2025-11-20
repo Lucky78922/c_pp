@@ -12,6 +12,8 @@ class CPP_V2_API UInteractionComponent : public USceneComponent
 public:
 	UInteractionComponent();
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float SphereRadius = 20.f;
 protected:
 	virtual void BeginPlay() override;
 

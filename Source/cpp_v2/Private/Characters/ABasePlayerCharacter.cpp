@@ -62,7 +62,7 @@ void AABasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		if (MoveAction)   EIC->BindAction(MoveAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Move);
 		if (LookAction)   EIC->BindAction(LookAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Look);
 		if (JumpAction)   EIC->BindAction(JumpAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Jump);
-		if (EquipAction)  EIC->BindAction(EquipAction,  ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Interact);
+		if (EquipAction)  EIC->BindAction(EquipAction,  ETriggerEvent::Started, this, &AABasePlayerCharacter::Interact);
 		if (AttackAction) EIC->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Attack);
 	}
 

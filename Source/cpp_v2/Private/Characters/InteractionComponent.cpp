@@ -1,6 +1,7 @@
 #include "Characters/InteractionComponent.h"
 #include "Characters/InteractionInterface.h"
 #include "DrawDebugHelpers.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 UInteractionComponent::UInteractionComponent()
 {
@@ -27,11 +28,27 @@ void UInteractionComponent::TryInteract(AActor* Interactor)
 
 	FCollisionQueryParams Params;
 	Params.AddIgnoredActor(Interactor);
-
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(Interactor);
 	FHitResult Hit;
-	float SphereRadius = 150.f;
 
-	if (GetWorld()->SweepSingleByChannel(Hit, Start, End, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(SphereRadius), Params))
+	
+	UKismetSystemLibrary::SphereTraceSingle(
+		this,
+		Start,
+		End,
+		SphereRadius,
+		UEngineTypes::ConvertToTraceType(ECC_Visibility),
+		false,
+		ActorsToIgnore,
+		EDrawDebugTrace::ForDuration,
+		Hit,
+		true,
+		FLinearColor::Black,
+		FLinearColor::Blue);
+	
+	//if (GetWorld()->SweepSingleByChannel(Hit, Start, End, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(SphereRadius), Params))
+	if (Hit.GetActor())
 	{
 		AActor* HitActor = Hit.GetActor();
 		if (HitActor && HitActor->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
