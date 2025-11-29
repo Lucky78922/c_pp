@@ -29,7 +29,7 @@ AABasePlayerCharacter::AABasePlayerCharacter()
 
 void AABasePlayerCharacter::BeginPlay()
 {
-	Super::BeginPlay();
+	Super::BeginPlay(); // <--- Ważne
 
 	if (IsLocallyControlled() && MainHUDClass)
 	{
@@ -40,8 +40,10 @@ void AABasePlayerCharacter::BeginPlay()
 			if (HUDInstance)
 			{
 				HUDInstance->AddToViewport();
-				HUDInstance->UpdateHealth(Attributes->CurrentHealth, Attributes->MaxHealth);
-				HUDInstance->UpdateStamina(Attributes->CurrentStamina, Attributes->MaxStamina);
+				
+				// Teraz to zadziała, bo dodaliśmy GetMaxHealth() w kroku 1
+				HUDInstance->UpdateHealth(Attributes->GetHealth(), Attributes->GetMaxHealth());
+				HUDInstance->UpdateStamina(Attributes->GetStamina(), Attributes->GetMaxStamina());
 			}
 		}
 	}
@@ -75,19 +77,6 @@ void AABasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 				if (MappingContext) Subsystem->AddMappingContext(MappingContext, 0);
 			}
 		}
-	}
-}
-
-void AABasePlayerCharacter::Move(const FInputActionValue& Value)
-{
-	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
-
-	FVector2D V = Value.Get<FVector2D>();
-	if (Controller && !V.IsNearlyZero())
-	{
-		const FRotator Yaw(0.f, Controller->GetControlRotation().Yaw, 0.f);
-		AddMovementInput(FRotationMatrix(Yaw).GetUnitAxis(EAxis::X), V.Y);
-		AddMovementInput(FRotationMatrix(Yaw).GetUnitAxis(EAxis::Y), V.X);
 	}
 }
 
@@ -139,28 +128,73 @@ void AABasePlayerCharacter::Equip(AWeapon* Weapon)
 	}
 }
 
+void AABasePlayerCharacter::OnStaminaUpdated(float Current, float Max)
+{
+	if (HUDInstance) HUDInstance->UpdateStamina(Current, Max);
+}
+
+void AABasePlayerCharacter::SetState(EPawnState NewState)
+{
+	Super::SetState(NewState);
+
+	if (HUDInstance)
+	{
+		HUDInstance->UpdatePlayerState(NewState);
+	}
+}
+
 void AABasePlayerCharacter::Attack(const FInputActionValue& Value)
 {
-	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
+	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit || CurrentState == EPawnState::Exhausted) return;
 
 	if (CurrentWeapon && AttackMontage)
 	{
 		if (Attributes && Attributes->CanPayStamina(Attributes->StaminaCosts.AttackCost))
 		{
 			Attributes->PayStamina(Attributes->StaminaCosts.AttackCost);
+			
+			if (Attributes->GetStamina() <= 5.0f) // Próg wyczerpania np. 5
+			{
+				SetState(EPawnState::Exhausted);
+			}
+
 			PlayAnimMontage(AttackMontage);
 			CurrentWeapon->StartAttack();
 		}
+		else
+		{
+			SetState(EPawnState::Exhausted);
+		}
+	}
+}
+
+void AABasePlayerCharacter::Move(const FInputActionValue& Value)
+{
+	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
+
+	if (CurrentState == EPawnState::Exhausted && Attributes->GetStamina() > 20.0f) // Próg powrotu sił
+	{
+		SetState(EPawnState::Idle); // Lub Combat jeśli masz broń
+	}
+
+	FVector2D V = Value.Get<FVector2D>();
+	
+	float SpeedMultiplier = (CurrentState == EPawnState::Exhausted) ? 0.5f : 1.0f;
+
+	if (Controller && !V.IsNearlyZero())
+	{
+		const FRotator Yaw(0.f, Controller->GetControlRotation().Yaw, 0.f);
+		AddMovementInput(FRotationMatrix(Yaw).GetUnitAxis(EAxis::X), V.Y * SpeedMultiplier);
+		AddMovementInput(FRotationMatrix(Yaw).GetUnitAxis(EAxis::Y), V.X * SpeedMultiplier);
 	}
 }
 
 void AABasePlayerCharacter::OnHealthUpdated(float Current, float Max)
 {
 	if (HUDInstance) HUDInstance->UpdateHealth(Current, Max);
-	if (Current <= 0) SetState(EPawnState::Dead);
-}
-
-void AABasePlayerCharacter::OnStaminaUpdated(float Current, float Max)
-{
-	if (HUDInstance) HUDInstance->UpdateStamina(Current, Max);
+	if (Current <= 0) 
+	{
+		SetState(EPawnState::Dead);
+		DisableInput(Cast<APlayerController>(GetController())); // Blokada wejścia
+	}
 }

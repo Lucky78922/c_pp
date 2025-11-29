@@ -31,26 +31,25 @@ public:
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	float MaxHealth = 100.f;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Attributes")
-	float CurrentHealth;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	float MaxStamina = 100.f;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Attributes")
-	float CurrentStamina;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	FStaminaCost StaminaCosts;
-
 	UPROPERTY(BlueprintAssignable)
 	FAttributeChangedSignature OnHealthChanged;
 
 	UPROPERTY(BlueprintAssignable)
 	FAttributeChangedSignature OnStaminaChanged;
+
+	// --- DODAJ TE FUNKCJE ---
+	UFUNCTION(BlueprintCallable)
+	float GetHealth() const { return CurrentHealth; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetMaxHealth() const { return MaxHealth; } // <--- TEGO BRAKOWAŁO!
+
+	UFUNCTION(BlueprintCallable)
+	float GetStamina() const { return CurrentStamina; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetMaxStamina() const { return MaxStamina; }
+	// ------------------------
 
 	bool CanPayStamina(float Cost) const;
 	void PayStamina(float Cost);
@@ -59,4 +58,23 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	void RegenerateStamina(float DeltaTime);
+
+private: 
+	// Zmieniono na private zgodnie z zadaniem
+	// meta=(AllowPrivateAccess="true") pozwala edytować w Blueprincie mimo że private w C++
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", meta=(AllowPrivateAccess="true"))
+	float MaxHealth = 100.f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Attributes", meta=(AllowPrivateAccess="true"))
+	float CurrentHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", meta=(AllowPrivateAccess="true"))
+	float MaxStamina = 100.f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Attributes", meta=(AllowPrivateAccess="true"))
+	float CurrentStamina;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
+	FStaminaCost StaminaCosts;
 };

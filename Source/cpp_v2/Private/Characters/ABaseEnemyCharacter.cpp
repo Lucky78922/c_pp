@@ -19,13 +19,18 @@ void AABaseEnemyCharacter::GetHit_Implementation(AActor* InstigatorActor, float 
 	if (Attributes)
 	{
 		Attributes->ReceiveDamage(Damage);
-		if (Attributes->CurrentHealth <= 0)
+		
+		// --- ZMIANA TUTAJ ---
+		// BYŁO: if (Attributes->CurrentHealth <= 0)
+		if (Attributes->GetHealth() <= 0)
+		// --------------------
 		{
 			Die();
 			return;
 		}
 	}
 
+	// ... reszta funkcji bez zmian ...
 	SetState(EPawnState::Hit);
 
 	if (HitMontage)

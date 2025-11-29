@@ -13,7 +13,8 @@ enum class EPawnState : uint8
 	Idle UMETA(DisplayName = "Idle"),
 	Combat UMETA(DisplayName = "Combat"),
 	Hit UMETA(DisplayName = "Hit"),
-	Dead UMETA(DisplayName = "Dead")
+	Dead UMETA(DisplayName = "Dead"),
+	Exhausted UMETA(DisplayName = "Exhausted") // <--- NOWE: Dodano stan wyczerpania
 };
 
 UCLASS()
@@ -37,7 +38,7 @@ public:
 	AWeapon* CurrentWeapon;
 
 	UFUNCTION(BlueprintCallable)
-	void SetState(EPawnState NewState);
+	virtual void SetState(EPawnState NewState); // <--- Zmieniono na virtual, aby nadpisać w graczu
 
 	UFUNCTION(BlueprintCallable)
 	void SetWeaponCollision(bool bEnable);

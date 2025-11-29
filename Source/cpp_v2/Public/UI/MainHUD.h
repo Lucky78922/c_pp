@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Characters/ABaseCharacter.h" // Potrzebne dla EPawnState
 #include "MainHUD.generated.h"
 
 UCLASS()
@@ -15,4 +16,8 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
 	void UpdateStamina(float Current, float Max);
+
+	// Nowa funkcja do wyświetlania stanu
+	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
+	void UpdatePlayerState(EPawnState NewState);
 };
