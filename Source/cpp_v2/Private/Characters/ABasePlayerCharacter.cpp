@@ -29,7 +29,7 @@ AABasePlayerCharacter::AABasePlayerCharacter()
 
 void AABasePlayerCharacter::BeginPlay()
 {
-	Super::BeginPlay(); // <--- Ważne
+	Super::BeginPlay();
 
 	if (IsLocallyControlled() && MainHUDClass)
 	{
@@ -41,7 +41,6 @@ void AABasePlayerCharacter::BeginPlay()
 			{
 				HUDInstance->AddToViewport();
 				
-				// Teraz to zadziała, bo dodaliśmy GetMaxHealth() w kroku 1
 				HUDInstance->UpdateHealth(Attributes->GetHealth(), Attributes->GetMaxHealth());
 				HUDInstance->UpdateStamina(Attributes->GetStamina(), Attributes->GetMaxStamina());
 			}
@@ -153,7 +152,7 @@ void AABasePlayerCharacter::Attack(const FInputActionValue& Value)
 		{
 			Attributes->PayStamina(Attributes->StaminaCosts.AttackCost);
 			
-			if (Attributes->GetStamina() <= 5.0f) // Próg wyczerpania np. 5
+			if (Attributes->GetStamina() <= 5.0f)
 			{
 				SetState(EPawnState::Exhausted);
 			}
@@ -172,9 +171,9 @@ void AABasePlayerCharacter::Move(const FInputActionValue& Value)
 {
 	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
 
-	if (CurrentState == EPawnState::Exhausted && Attributes->GetStamina() > 20.0f) // Próg powrotu sił
+	if (CurrentState == EPawnState::Exhausted && Attributes->GetStamina() > 20.0f)
 	{
-		SetState(EPawnState::Idle); // Lub Combat jeśli masz broń
+		SetState(EPawnState::Idle);
 	}
 
 	FVector2D V = Value.Get<FVector2D>();
@@ -195,6 +194,6 @@ void AABasePlayerCharacter::OnHealthUpdated(float Current, float Max)
 	if (Current <= 0) 
 	{
 		SetState(EPawnState::Dead);
-		DisableInput(Cast<APlayerController>(GetController())); // Blokada wejścia
+		DisableInput(Cast<APlayerController>(GetController()));
 	}
 }

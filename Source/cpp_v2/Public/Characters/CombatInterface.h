@@ -15,7 +15,6 @@ class CPP_V2_API ICombatInterface
 	GENERATED_BODY()
 
 public:
-	// Changed to BlueprintNativeEvent to allow Execute_GetHit calls
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combat")
 	void GetHit(AActor* InstigatorActor, float Damage);
 };

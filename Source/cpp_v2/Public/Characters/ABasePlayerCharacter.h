@@ -63,7 +63,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
 	float BaseLookUpRate = 1.f;
 
-    virtual void SetState(EPawnState NewState) override; // Nadpisujemy
+    virtual void SetState(EPawnState NewState) override;
 
 	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;

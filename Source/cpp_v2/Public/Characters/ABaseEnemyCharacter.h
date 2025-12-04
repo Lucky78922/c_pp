@@ -5,6 +5,8 @@
 #include "Characters/CombatInterface.h"
 #include "ABaseEnemyCharacter.generated.h"
 
+class UBehaviorTree;
+
 UCLASS()
 class CPP_V2_API AABaseEnemyCharacter : public AABaseCharacter, public ICombatInterface
 {
@@ -13,8 +15,15 @@ class CPP_V2_API AABaseEnemyCharacter : public AABaseCharacter, public ICombatIn
 public:
 	AABaseEnemyCharacter();
 
-	// Important: Use _Implementation for BlueprintNativeEvents
+	UPROPERTY(EditAnywhere, Category = "AI")
+	UBehaviorTree* BehaviorTree;
+    
+    UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UAnimMontage* AttackMontage;
+
 	virtual void GetHit_Implementation(AActor* InstigatorActor, float Damage) override;
+
+	void TryAttack();
 
 protected:
 	virtual void BeginPlay() override;

@@ -37,19 +37,17 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FAttributeChangedSignature OnStaminaChanged;
 
-	// --- DODAJ TE FUNKCJE ---
 	UFUNCTION(BlueprintCallable)
 	float GetHealth() const { return CurrentHealth; }
 
 	UFUNCTION(BlueprintCallable)
-	float GetMaxHealth() const { return MaxHealth; } // <--- TEGO BRAKOWAŁO!
+	float GetMaxHealth() const { return MaxHealth; }
 
 	UFUNCTION(BlueprintCallable)
 	float GetStamina() const { return CurrentStamina; }
 
 	UFUNCTION(BlueprintCallable)
 	float GetMaxStamina() const { return MaxStamina; }
-	// ------------------------
 
 	bool CanPayStamina(float Cost) const;
 	void PayStamina(float Cost);
@@ -60,8 +58,6 @@ protected:
 	void RegenerateStamina(float DeltaTime);
 
 private: 
-	// Zmieniono na private zgodnie z zadaniem
-	// meta=(AllowPrivateAccess="true") pozwala edytować w Blueprincie mimo że private w C++
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", meta=(AllowPrivateAccess="true"))
 	float MaxHealth = 100.f;
 
