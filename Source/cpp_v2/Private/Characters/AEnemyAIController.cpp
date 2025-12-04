@@ -47,7 +47,7 @@ void AAEnemyAIController::OnPossess(APawn* InPawn)
 
 void AAEnemyAIController::OnTargetDetected(AActor* Actor, FAIStimulus Stimulus)
 {
-	if (!Actor->ActorHasTag("Player")) return
+	if (!Actor->ActorHasTag("Player")) return;
 
 	UBlackboardComponent* BB = GetBlackboardComponent();
 	if (!BB) return;
