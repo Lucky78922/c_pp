@@ -62,7 +62,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
 	float BaseLookUpRate = 1.f;
+	FTimerHandle AttackCooldownTimer;
+	bool bCanAttack = true;
 
+	void ResetAttack();
     virtual void SetState(EPawnState NewState) override;
 
 	virtual void BeginPlay() override;

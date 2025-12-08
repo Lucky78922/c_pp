@@ -62,9 +62,9 @@ void AABasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	{
 		if (MoveAction)   EIC->BindAction(MoveAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Move);
 		if (LookAction)   EIC->BindAction(LookAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Look);
-		if (JumpAction)   EIC->BindAction(JumpAction,   ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Jump);
+		if (JumpAction)   EIC->BindAction(JumpAction,   ETriggerEvent::Started, this, &AABasePlayerCharacter::Jump);
 		if (EquipAction)  EIC->BindAction(EquipAction,  ETriggerEvent::Started, this, &AABasePlayerCharacter::Interact);
-		if (AttackAction) EIC->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AABasePlayerCharacter::Attack);
+		if (AttackAction) EIC->BindAction(AttackAction, ETriggerEvent::Started, this, &AABasePlayerCharacter::Attack);
 	}
 
 	if (APlayerController* PC = Cast<APlayerController>(GetController()))
@@ -94,6 +94,11 @@ void AABasePlayerCharacter::Look(const FInputActionValue& Value)
 void AABasePlayerCharacter::Jump()
 {
 	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
+
+	if (GetCharacterMovement()->IsFalling())
+	{
+		return;
+	}
 
 	if (Attributes && Attributes->CanPayStamina(Attributes->StaminaCosts.JumpCost))
 	{
@@ -146,6 +151,15 @@ void AABasePlayerCharacter::Attack(const FInputActionValue& Value)
 {
 	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit || CurrentState == EPawnState::Exhausted) return;
 
+	if (!bCanAttack) return;
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && AttackMontage)
+	{
+		if (AnimInstance->Montage_IsPlaying(AttackMontage))
+		{
+			return;
+		}
+	}
 	if (CurrentWeapon && AttackMontage)
 	{
 		if (Attributes && Attributes->CanPayStamina(Attributes->StaminaCosts.AttackCost))
@@ -159,6 +173,10 @@ void AABasePlayerCharacter::Attack(const FInputActionValue& Value)
 
 			PlayAnimMontage(AttackMontage);
 			CurrentWeapon->StartAttack();
+
+			bCanAttack = false;
+
+			GetWorldTimerManager().SetTimer(AttackCooldownTimer, this, &AABasePlayerCharacter::ResetAttack, 1.5f, false);
 		}
 		else
 		{
@@ -166,7 +184,10 @@ void AABasePlayerCharacter::Attack(const FInputActionValue& Value)
 		}
 	}
 }
-
+void AABasePlayerCharacter::ResetAttack()
+{
+	bCanAttack = true;
+}
 void AABasePlayerCharacter::Move(const FInputActionValue& Value)
 {
 	if (CurrentState == EPawnState::Dead || CurrentState == EPawnState::Hit) return;
