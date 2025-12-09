@@ -56,7 +56,6 @@ void AAEnemyAIController::OnTargetDetected(AActor* Actor, FAIStimulus Stimulus)
 	{
 		BB->SetValueAsObject(TargetActorKey, Actor);
 		 
-		BB->ClearValue(LastKnownLocationKey);
 	}
 	else
 	{
