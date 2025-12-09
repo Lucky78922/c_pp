@@ -55,7 +55,7 @@ void AAEnemyAIController::OnTargetDetected(AActor* Actor, FAIStimulus Stimulus)
 	if (Stimulus.WasSuccessfullySensed())
 	{
 		BB->SetValueAsObject(TargetActorKey, Actor);
-
+		 
 		BB->ClearValue(LastKnownLocationKey);
 	}
 	else
