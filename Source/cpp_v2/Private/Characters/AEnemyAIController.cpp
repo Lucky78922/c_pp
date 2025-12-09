@@ -1,4 +1,4 @@
-#include "Characters/AEnemyAIController.h"
+﻿#include "Characters/AEnemyAIController.h"
 #include "Characters/ABaseEnemyCharacter.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTree.h"
@@ -55,11 +55,14 @@ void AAEnemyAIController::OnTargetDetected(AActor* Actor, FAIStimulus Stimulus)
 	if (Stimulus.WasSuccessfullySensed())
 	{
 		BB->SetValueAsObject(TargetActorKey, Actor);
+
+		BB->ClearValue(LastKnownLocationKey);
 	}
 	else
 	{
 		BB->SetValueAsVector(LastKnownLocationKey, Actor->GetActorLocation());
-		BB->SetValueAsObject(TargetActorKey, nullptr);
+
+		BB->ClearValue(TargetActorKey);
 	}
 }
 
