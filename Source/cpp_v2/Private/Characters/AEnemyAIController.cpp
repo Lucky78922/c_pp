@@ -54,15 +54,28 @@ void AAEnemyAIController::OnTargetDetected(AActor* Actor, FAIStimulus Stimulus)
 
 	if (Stimulus.WasSuccessfullySensed())
 	{
+		TimerHandle.Invalidate();
 		BB->SetValueAsObject(TargetActorKey, Actor);
 		 
 	}
 	else
 	{
-		BB->SetValueAsVector(LastKnownLocationKey, Actor->GetActorLocation());
-
-		BB->ClearValue(TargetActorKey);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this,&AAEnemyAIController::ForgetTarget,15.f);
 	}
+}
+
+void AAEnemyAIController::ForgetTarget()
+{
+	UBlackboardComponent* BB = GetBlackboardComponent();
+	if (!BB) return;
+	auto Target=BB->GetValueAsObject(TargetActorKey);
+	auto TargetActor = Cast<AActor>(Target);
+	if (TargetActor)
+		{
+			BB->SetValueAsVector(LastKnownLocationKey, TargetActor->GetActorLocation());
+		
+			BB->ClearValue(TargetActorKey);
+		}
 }
 
 void AAEnemyAIController::PerformAttack_Implementation()

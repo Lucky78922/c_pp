@@ -26,6 +26,10 @@ protected:
 	UFUNCTION()
 	void OnTargetDetected(AActor* Actor, FAIStimulus Stimulus);
 
+	void ForgetTarget();
+
+	UPROPERTY()
+	FTimerHandle TimerHandle;
 public:
 	virtual void PerformAttack_Implementation() override;
 	virtual bool CanAIAtack_Implementation() override;
